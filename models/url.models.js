@@ -52,7 +52,7 @@ urlSchema.pre('save', async function(next) {
     const record = this;
     if (record.qrcode == undefined) {
         const shortid = await shortId.generate()
-        const shortUrl = process.env.domain + '/' + shortid;
+        const shortUrl = process.env.domain + shortid;
         this.shortUrl = shortUrl;
         this.short = shortid;
 
