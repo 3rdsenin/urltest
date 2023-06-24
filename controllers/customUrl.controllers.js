@@ -1,4 +1,4 @@
-const urlCSchema = require('../models/customUrl.models')
+const urlCSchema = require('../models/url.models')
 
 const createCShortUrl = async(req, res) => {
     await urlCSchema.create({ full: req.body.fullUrl, domain: req.body.customdomain })

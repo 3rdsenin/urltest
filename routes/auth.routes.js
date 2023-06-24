@@ -1,11 +1,24 @@
 const router = require('express').Router();
+const authController = require('../controllers/auth.controllers')
 
-router.get('/', (req, res) => {
-    res.status(400).send("Welcome to auth routes")
+router.get('/signup', (req, res) => {
+    res.render('signup', {})
+});
+router.post('/signup', authController.signup);
+
+router.get('/login', (req, res) => {
+    res.render('login')
+});
+
+router.all('/logout', (req, res) => {
+
+    req.session.destroy()
+    res.clearCookie('connect.sid') // clean up!
+    res.redirect('/')
+
 })
 
-router.get('/', (req, res) => {
-    res.status(400).send("Welcome to auth routes")
-})
+
+router.post('/login', authController.login);
 
 module.exports = router;

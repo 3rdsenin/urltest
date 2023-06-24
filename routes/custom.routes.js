@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const urls = require('../controllers/customUrl.controllers')
-const ShortUrl = require('../models/url.models')
+const ShortUrl = require('../controllers/url.controllers')
+const { isAuthorized, getUserIdFromToken } = require('../utils/functions')
 
-router.post('/', urls.createCShortUrl)
+router.post('/', isAuthorized, ShortUrl.createShortUrl)
 
-router.get('/', async(req, res) => {
-    const shortUrls = await urls.getAllCUrls();
+router.get('/', isAuthorized, async(req, res) => {
+    const userID = getUserIdFromToken(req.session.token);
+    const shortUrls = await ShortUrl.getCustomUrls(userID);
     res.render('custom', { shortUrls: shortUrls });
 })
 

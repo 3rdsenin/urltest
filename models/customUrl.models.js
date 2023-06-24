@@ -33,6 +33,10 @@ const urlCSchema = new Schema({
         type: String,
 
     },
+    shortUrl: {
+        type: String,
+
+    },
     qrcode: {
         type: String,
 
@@ -52,8 +56,11 @@ urlCSchema.post('save', (doc, next) => {
 });
 
 urlCSchema.pre('save', async function(next) {
-    const shortUrl = await shortId.generate();
-    this.short = this.domain + '/' + shortUrl;
+    const shortUrl = process.env.domain + '/' + this.domain;
+    const shortid = await shortId.generate()
+    this.short = shortid;
+    this.shortUrl = shortUrl;
+
 
     const qrcodedata = await generateQRCode(this.short);
     this.qrcode = qrcodedata;

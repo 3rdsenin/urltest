@@ -3,7 +3,9 @@ const connect = require('./database/index')
 require("dotenv").config();
 const port = process.env.PORT || 5000
 
-connect();
+const mongo_url = process.env.MONGODB_URL;
+
+connect(mongo_url);
 
 
 
