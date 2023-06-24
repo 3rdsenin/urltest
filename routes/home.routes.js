@@ -7,10 +7,7 @@ const { isAuthorized, getUserIdFromToken, } = require('../utils/functions')
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-    socket: {
-        host: process.env.redis_host,
-        port: process.env.redis_port
-    }
+    url: process.env.REDIS_URL
 });
 
 
