@@ -9,7 +9,7 @@ const urls = require('../controllers/url.controllers')
 //controller for sign up route
 module.exports.signup = async(req, res) => {
 
-    console.log(req.body)
+    //console.log(req.body)
     try {
 
         const { firstname, lastname, email, password } = req.body;

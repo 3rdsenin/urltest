@@ -70,7 +70,7 @@ urlSchema.pre('save', async function(next) {
         if (!record.domain == undefined || !record.domain == "" || !record.domain == null) {
             this.domain = record.domain;
             this.type = "custom";
-            const shortUrl = process.env.domain + '/' + this.domain;
+            const shortUrl = process.env.domain + this.domain;
             this.shortUrl = shortUrl;
             this.short = shortid;
             const qrcodedata = await generateQRCode(this.shortUrl);
@@ -80,7 +80,7 @@ urlSchema.pre('save', async function(next) {
         } else {
             this.domain = shortid;
             this.type = "regular";
-            const shortUrl = process.env.domain + '/' + shortid;
+            const shortUrl = process.env.domain + shortid;
             this.shortUrl = shortUrl;
             this.short = shortid;
 

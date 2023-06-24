@@ -1,8 +1,10 @@
 const Router = require('express').Router();
-const urls = require('../models/url.models')
+const urls = require('../models/url.models');
+const { isAuthorized, getUserIdFromToken, } = require('../utils/functions')
 
-Router.get('/', async(req, res) => {
-    const allUrls = await urls.find();
+Router.get('/', isAuthorized, async(req, res) => {
+    const userID = getUserIdFromToken(req.session.token);
+    const allUrls = await urls.find({ userID: userID });
     //const aurls = JSON.parse(allUrls)
     // const history = allUrls.history
     // history.forEach((element, index) => {
