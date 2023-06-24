@@ -6,7 +6,13 @@ const date_time = require('../middleware/requestdatetime.middleware')
 const { isAuthorized, getUserIdFromToken, } = require('../utils/functions')
 const redis = require('redis');
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({
+    password: process.env.redis_password,
+    socket: {
+        host: process.env.redis_host,
+        port: process.env.redis_port
+    }
+});
 
 
 redisClient.connect().then(() => {
